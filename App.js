@@ -1,6 +1,7 @@
 import React from 'react';
 import Home from './pages/home/Home'
 import Detail from './pages/detail/Detail'
+import SnapCarousel from './pages/detail/SnapCarousel'
 import Settings from './pages/settings/Settings'
 import {
   Text
@@ -31,6 +32,15 @@ const HomeStack = createStackNavigator({
       },
     }),
   },
+}, {
+  // mode: 'modal',
+  // headerBackTitleVisible: false,
+});
+
+const SettingsStack = createStackNavigator({
+  Settings: Settings,
+});
+const OtherStack = createStackNavigator({
   Details: {
     screen: Detail,
     navigationOptions: () => ({
@@ -45,22 +55,21 @@ const HomeStack = createStackNavigator({
       },
     }),
   },
-}, {
-  mode: 'modal',
-  headerBackTitleVisible: false,
-  // headerMode: 'none',
-  // onTransitionStart(){
-  //   alert('hi')
-  // },
-  // onTransitionEnd(){
-  //   alert('fuck')
-  // }
-});
-
-const SettingsStack = createStackNavigator({
-  Settings: Settings,
-  Details: Detail,
-});
+  SnapCarousel: {
+    screen: SnapCarousel,
+    navigationOptions: () => ({
+      title: 'SnapCarousel',
+      headerStyle: {
+        backgroundColor: '#428bca',
+      },
+      headerBackTitle: 'mark',
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    }),
+  },
+})
 
 export default createAppContainer(createBottomTabNavigator(
   {

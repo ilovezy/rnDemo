@@ -70,7 +70,7 @@ class HomeScreen extends React.Component {
   }
 
   render() {
-    alert(JSON.stringify(this.state.avatarSource, null, 4))
+    // alert(JSON.stringify(this.state.avatarSource, null, 4))
     return (
       <View style={{padding: 15}}>
         <Text>Home Screen 2312</Text>
@@ -92,6 +92,12 @@ class HomeScreen extends React.Component {
         <Button
           title="Go to Details"
           onPress={() => {this.props.navigation.push('Details')}}
+        />
+
+        <Button
+          title="Go to Details"
+          color="pink"
+          onPress={() => {this.props.navigation.push('SnapCarousel')}}
         />
       </View>
     );
