@@ -52,9 +52,9 @@ const HomeStack = createStackNavigator({
   // onTransitionStart(){
   //   alert('hi')
   // },
-  onTransitionEnd(){
-    alert('fuck')
-  }
+  // onTransitionEnd(){
+  //   alert('fuck')
+  // }
 });
 
 const SettingsStack = createStackNavigator({
