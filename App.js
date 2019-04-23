@@ -2,29 +2,62 @@ import React from 'react';
 import Home from './pages/home/Home'
 import Detail from './pages/detail/Detail'
 import Settings from './pages/settings/Settings'
-
+import {
+  Text
+} from 'react-native';
 import {
   createBottomTabNavigator,
   createStackNavigator,
   createAppContainer,
   createDrawerNavigator,
 } from 'react-navigation';
+import Ionicons from 'react-native-vector-icons/FontAwesome5';
 
-const HomeStack = createDrawerNavigator({
-  Home: Home,
-  Details: Detail,
+const HomeStack = createStackNavigator({
+  Home: {
+    screen: Home,
+    navigationOptions: () => ({
+      title: 'Home12312',
+      headerStyle: {
+        backgroundColor: '#f4511e',
+        // alignSelf: 'center'
+      },
+      headerBackTitle: 'A much too long text for back button from B to A',
+      headerTruncatedBackTitle: `to A`,
+      // headerBackTitle: 'fucmk u',
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    }),
+  },
+  Details: {
+    screen: Detail,
+    navigationOptions: () => ({
+      title: 'Detail32132231',
+      headerStyle: {
+        backgroundColor: '#f4511e',
+      },
+      headerBackTitle: 'mark',
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    }),
+  },
 }, {
   mode: 'modal',
-  headerMode: 'float',
+  headerBackTitleVisible: false,
+  // headerMode: 'none',
   // onTransitionStart(){
   //   alert('hi')
   // },
-  // onTransitionEnd(){
-  //   alert('fuck')
-  // }
+  onTransitionEnd(){
+    alert('fuck')
+  }
 });
 
-const SettingsStack = createDrawerNavigator({
+const SettingsStack = createStackNavigator({
   Settings: Settings,
   Details: Detail,
 });
@@ -35,24 +68,22 @@ export default createAppContainer(createBottomTabNavigator(
     Settings: SettingsStack,
   },
   {
-    animationEnabled: true,
-    swipeEnabled: true,
-    ackBehavior: 'none', // 按 back 键是否跳转到第一个Tab(首页)， none 为不跳转
+    defaultNavigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused, horizontal, tintColor }) => {
+        const { routeName } = navigation.state;
+        let iconName;
+        if (routeName === 'Home') {
+          iconName = `ban`;
+        } else if (routeName === 'Settings') {
+          iconName = `comments`;
+        }
+        // You can return any component that you like here!
+        return <Ionicons name={iconName} size={25} color={tintColor} />;
+      },
+    }),
     tabBarOptions: {
-      activeTintColor: '#428bca', // 文字和图片选中颜色
-      inactiveTintColor: '#999', // 文字和图片未选中颜色
-      showIcon: true, // android 默认不显示 icon, 需要设置为 true 才会显示
-      indicatorStyle: {
-        height: 1  // 如TabBar下面显示有一条线，可以设高度为0后隐藏
-      },
-      style: {
-        backgroundColor: '#fff', // TabBar 背景色
-        // height: 44
-      },
-      labelStyle: {
-        fontSize: 18, // 文字大小
-      },
+      activeTintColor: '#428bca',
+      inactiveTintColor: '#aaa',
     },
-    /* Other configuration remains unchanged */
   }
 ));
