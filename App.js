@@ -12,7 +12,7 @@ import {
   createAppContainer,
   createDrawerNavigator,
 } from 'react-navigation';
-import Ionicons from 'react-native-vector-icons/FontAwesome5';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const HomeStack = createStackNavigator({
   Home: {
@@ -75,6 +75,7 @@ export default createAppContainer(createBottomTabNavigator(
   {
     Home: HomeStack,
     Settings: SettingsStack,
+    Other: OtherStack,
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
@@ -82,9 +83,11 @@ export default createAppContainer(createBottomTabNavigator(
         const { routeName } = navigation.state;
         let iconName;
         if (routeName === 'Home') {
-          iconName = `ban`;
+          iconName = `ios-basket`;
         } else if (routeName === 'Settings') {
-          iconName = `comments`;
+          iconName = `md-color-fill`;
+        } else if (routeName === 'Other') {
+          iconName = `md-desktop`;
         }
         // You can return any component that you like here!
         return <Ionicons name={iconName} size={25} color={tintColor} />;

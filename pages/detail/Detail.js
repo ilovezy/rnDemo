@@ -1,20 +1,19 @@
 import React from "react";
 import {Button, View, Text} from "react-native";
-import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
+import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 
 
 class DetailsScreen extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {
       currentDay: '2012-03-01'
     }
   }
+
   render() {
     return (
       <View>
-        <Text>Details! </Text>
-
         <Calendar
           // Initially visible month. Default = Date()
           markedDates={{
@@ -31,15 +30,19 @@ class DetailsScreen extends React.Component {
           // Handler which gets executed on day press. Default = undefined
           onDayPress={(day) => {
             console.log('selected day', day)
-            alert(JSON.stringify(day,  null,4))
+            alert(JSON.stringify(day, null, 4))
             this.setState({currentDay: day.dateString})
           }}
           // Handler which gets executed on day long press. Default = undefined
-          onDayLongPress={(day) => {console.log('selected day', day)}}
+          onDayLongPress={(day) => {
+            console.log('selected day', day)
+          }}
           // Month format in calendar title. Formatting values: http://arshaw.com/xdate/#Formatting
           monthFormat={'yyyy MM'}
           // Handler which gets executed when visible month changes in calendar. Default = undefined
-          onMonthChange={(month) => {console.log('month changed', month)}}
+          onMonthChange={(month) => {
+            console.log('month changed', month)
+          }}
           // Hide month navigation arrows. Default = false
           // hideArrows={true}
           // Replace default arrows with custom ones (direction can be 'left' or 'right')
@@ -59,6 +62,13 @@ class DetailsScreen extends React.Component {
           onPressArrowLeft={substractMonth => substractMonth()}
           // Handler which gets executed when press arrow icon left. It receive a callback can go next month
           onPressArrowRight={addMonth => addMonth()}
+        />
+        <Button
+          title="Go to Details"
+          color="pink"
+          onPress={() => {
+            this.props.navigation.push('SnapCarousel')
+          }}
         />
       </View>
     );
