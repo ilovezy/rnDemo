@@ -1,7 +1,20 @@
 import React from "react";
 import {Button, View, Text} from "react-native";
+import ImageCropper from 'react-native-image-crop-picker';
 
 class SettingsScreen extends React.Component {
+
+  openImageCropper(){
+    ImageCropper.openPicker({
+      width: 300,
+      height: 400,
+      cropping: true
+    }).then(image => {
+      console.log(image);
+      alert(JSON.stringify(image))
+    });
+  }
+
   render() {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -11,6 +24,11 @@ class SettingsScreen extends React.Component {
         <Button
           title="Go to Details"
           onPress={() => this.props.navigation.push('Details')}
+        />
+
+        <Button
+          title="openImageCropper"
+          onPress={() => this.openImageCropper()}
         />
       </View>
     );
