@@ -16,7 +16,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import SplashScreen from 'react-native-splash-screen'
 setTimeout(() => {
   SplashScreen.hide();
-}, 2000)
+}, 1000)
 
 
 const HomeStack = createStackNavigator({

@@ -3,6 +3,7 @@ import {Button, View, Text,Image} from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5"
 import ImagePicker from 'react-native-image-picker';
 import SplashScreen from 'react-native-splash-screen'
+import * as Progress from 'react-native-progress';
 
 class HomeScreen extends React.Component {
   constructor(props){
@@ -85,6 +86,11 @@ class HomeScreen extends React.Component {
     // alert(JSON.stringify(this.state.avatarSource, null, 4))
     return (
       <View style={{padding: 15}}>
+        <Progress.Bar progress={0.3} width={200} />
+        <Progress.Pie progress={0.4} size={50} />
+        <Progress.Circle size={30} indeterminate={true} />
+        <Progress.CircleSnail color={['red', 'green', 'blue']} />
+
         <Text>Home Screen 2312</Text>
         <Text>{this.state.title}</Text>
         {
