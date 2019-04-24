@@ -13,6 +13,11 @@ import {
   createDrawerNavigator,
 } from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import SplashScreen from 'react-native-splash-screen'
+setTimeout(() => {
+  SplashScreen.hide();
+}, 2000)
+
 
 const HomeStack = createStackNavigator({
   Home: {
