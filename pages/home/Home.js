@@ -1,9 +1,31 @@
 import React from "react";
-import {Button, View, Text,Image,StyleSheet} from "react-native";
+import {Button, View, Text,Image,StyleSheet, Modal} from "react-native";
 import Icon from "react-native-vector-icons/Ionicons"
 import ImagePicker from 'react-native-image-picker';
 import SplashScreen from 'react-native-splash-screen'
 import * as Progress from 'react-native-progress';
+import ImageViewer from 'react-native-image-zoom-viewer';
+const images = [{
+  // Simplest usage.
+  url: 'https://avatars2.githubusercontent.com/u/7970947?v=3&s=460',
+
+  // width: number
+  // height: number
+  // Optional, if you know the image size, you can set the optimization performance
+
+  // You can pass props to <Image />.
+  props: {
+    // headers: ...
+  }
+}, {
+  props: {
+    // Or you can set source directory.
+    url: '',
+    // source: require('../background.png')
+  }
+}]
+
+import Toast from 'react-native-root-toast';
 
 class HomeScreen extends React.Component {
   constructor(props){
@@ -18,6 +40,7 @@ class HomeScreen extends React.Component {
         },
         body: 'Your Body goes here',
       },
+      isModalShow: false
     }
   }
   componentDidMount() {
@@ -25,14 +48,38 @@ class HomeScreen extends React.Component {
     // After having done stuff (such as async tasks) hide the splash screen
   }
 
-  openSplashScreen(){
+  showToast = () => {
+    // Add a Toast on screen.
+    let toast = Toast.show('This is a message', {
+      duration: Toast.durations.LONG,
+      position: Toast.positions.BOTTOM,
+      shadow: true,
+      animation: true,
+      hideOnPress: true,
+      delay: 0,
+      onShow: () => {
+        // calls on toast\`s appear animation start
+      },
+      onShown: () => {
+        // calls on toast\`s appear animation end.
+      },
+      onHide: () => {
+        // calls on toast\`s hide animation start.
+      },
+      onHidden: () => {
+        // calls on toast\`s hide animation end.
+      }
+    });
+  }
+
+  openSplashScreen = () => {
     SplashScreen.show()
     setTimeout(() => {
       SplashScreen.hide()
     }, 3000)
   }
 
-  openImg(){
+  openImg = () => {
     const options = {
       title: 'Select Avatar 哈哈哈',
       customButtons: [{ name: 'fdafdsfdasfas', title: 'Choose Photo from Facebook' }],
@@ -82,10 +129,28 @@ class HomeScreen extends React.Component {
     // });
   }
 
+  closeModal = () => {
+    this.setState({
+      isModalShow: false
+    })
+  }
+
   render() {
     // alert(JSON.stringify(this.state.avatarSource, null, 4))
     return (
       <View style={{padding: 15}}>
+        {/*<Modal visible={true} transparent={true}>*/}
+          {/*<ImageViewer onPress={this.closeModal}  imageUrls={images}/>*/}
+          {/*<Text>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis, consequuntur enim est expedita fuga fugit iusto non quas voluptatem voluptates.</Text>*/}
+        {/*</Modal>*/}
+
+        <Button
+          title="Go to Details"
+          onPress={() => {
+            alert('fuck')
+            this.setState({isModalShow: true})}}
+        />
+
         <Progress.Bar progress={0.3} width={200} />
         <Progress.Pie progress={0.4} size={50} />
         <Progress.Circle size={30} indeterminate={true} />
@@ -106,6 +171,11 @@ class HomeScreen extends React.Component {
           title="Open select img"
           color="green"
           onPress={() => {this.openImg()}}
+        />
+        <Button
+          title="show Toast"
+          color="red"
+          onPress={this.showToast}
         />
         <Button
           title="Go to Details"

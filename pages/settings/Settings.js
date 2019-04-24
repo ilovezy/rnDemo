@@ -4,6 +4,7 @@ import ImageCropper from 'react-native-image-crop-picker';
 import Modal from "react-native-modal";
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
+import DropdownAlert from 'react-native-dropdownalert';
 
 class SettingsScreen extends React.Component {
   constructor(props) {
@@ -11,6 +12,22 @@ class SettingsScreen extends React.Component {
     this.state = {
       isModalVisible: false
     }
+  }
+  componentDidMount() {
+    // this.fetchData();
+  }
+  fetchData = async () => {
+    alert('fuck')
+    try {
+      alert('fuck')
+      await fetch('https://mywebsite.com/endpoint/');
+    } catch (error) {
+      this.dropdown.alertWithType('error', 'Error', error.message);
+    }
+  };
+
+  sayShit = () => {
+    this.dropdown.alertWithType('error', 'Error', 'oll shit');
   }
 
   openImageCropper = () => {
@@ -39,9 +56,7 @@ class SettingsScreen extends React.Component {
     return (
       <View style={{flex:1, backgroundColor: '#f3f3f3'}}>
 
-        <TouchableOpacity onPress={this._toggleModal}>
-          <Text>Show Modal</Text>
-        </TouchableOpacity>
+        <Text>Show Modal</Text>
         <Modal isVisible={this.state.isModalVisible}
                onSwipeComplete={() => this.setState({isModalVisible: false})}
                onBackdropPress={() => this.setState({isModalVisible: false})}
@@ -55,17 +70,20 @@ class SettingsScreen extends React.Component {
           </View>
         </Modal>
 
-        {/* other code from before here */}
-        <Text>SettingsScreen SCREEN</Text>
-        <Text>Lorem ipsum dolor sit amet, </Text>
         <Button
           title="Go to Details"
           onPress={() => this.props.navigation.push('Details')}
         />
 
         <Button
+          color="green"
           title="openImageCropper"
           onPress={() => this.openImageCropper()}
+        />
+        <Button
+          color="orange"
+          title="say Shit"
+          onPress={this.sayShit}
         />
 
         <Button
@@ -90,6 +108,8 @@ class SettingsScreen extends React.Component {
           </ActionButton.Item>
         </ActionButton>
 
+
+        <DropdownAlert ref={ref => this.dropdown = ref} />
       </View>
     );
   }

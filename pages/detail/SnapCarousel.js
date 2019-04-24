@@ -1,9 +1,10 @@
 import React from "react";
 import {Button, View, Text} from "react-native";
 import Carousel from 'react-native-snap-carousel';
+import DropdownAlert from 'react-native-dropdownalert';
 
 class SettingsScreen extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {
       entries: [{
@@ -11,25 +12,50 @@ class SettingsScreen extends React.Component {
       }, {title: 'shit'}]
     }
   }
-  _renderItem ({item, index}) {
+
+
+  componentDidMount() {
+    // this.fetchData();
+  }
+
+  _renderItem({item, index}) {
     return (
       <View style={{backgroundColor: 'pink', height: 400}}>
-        <Text >{ item.title }</Text>
+        <Text>{item.title}</Text>
       </View>
     );
   }
 
+  fetchData = async () => {
+    try {
+      await fetch('https://mywebsite.com/endpoint/');
+    } catch (error) {
+      this.dropdown.alertWithType('error', 'Error', error.message);
+    }
+  };
+
   render() {
     return (
-      <Carousel
-        ref={(c) => { this._carousel = c; }}
-        data={this.state.entries}
-        renderItem={this._renderItem}
-        // layout={'default'}
-        sliderWidth={400}
-        itemWidth={300}
-      />
+      <View>
+        <Text>金佛打随机发</Text>
+        {/*<Carousel*/}
+          {/*ref={(c) => {*/}
+            {/*this._carousel = c;*/}
+          {/*}}*/}
+          {/*data={this.state.entries}*/}
+          {/*renderItem={this._renderItem}*/}
+          {/*// layout={'default'}*/}
+          {/*sliderWidth={400}*/}
+          {/*itemWidth={300}*/}
+        {/*/>*/}
+
+
+        {/*<DropdownAlert ref={ref => this.dropdown = ref}/>*/}
+
+      </View>
+
     );
   }
 }
+
 export default SettingsScreen
