@@ -1,6 +1,6 @@
 import React from "react";
-import {Button, View, Text,Image} from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome5"
+import {Button, View, Text,Image,StyleSheet} from "react-native";
+import Icon from "react-native-vector-icons/Ionicons"
 import ImagePicker from 'react-native-image-picker';
 import SplashScreen from 'react-native-splash-screen'
 import * as Progress from 'react-native-progress';
