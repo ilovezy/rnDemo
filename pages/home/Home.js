@@ -2,6 +2,7 @@ import React from "react";
 import {Button, View, Text,Image} from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5"
 import ImagePicker from 'react-native-image-picker';
+import SplashScreen from 'react-native-splash-screen'
 
 class HomeScreen extends React.Component {
   constructor(props){
@@ -22,6 +23,14 @@ class HomeScreen extends React.Component {
     // do stuff while splash screen is shown
     // After having done stuff (such as async tasks) hide the splash screen
   }
+
+  openSplashScreen(){
+    SplashScreen.show()
+    setTimeout(() => {
+      SplashScreen.hide()
+    }, 3000)
+  }
+
   openImg(){
     const options = {
       title: 'Select Avatar 哈哈哈',
@@ -95,6 +104,12 @@ class HomeScreen extends React.Component {
         <Button
           title="Go to Details"
           onPress={() => {this.props.navigation.push('Details')}}
+        />
+
+        <Button
+          color='purple'
+          title="splash screen"
+          onPress={() => {this.openSplashScreen()}}
         />
 
         <Button
