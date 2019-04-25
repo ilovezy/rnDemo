@@ -1,5 +1,5 @@
 import React from "react";
-import {ActivityIndicator, Modal, StyleSheet, TouchableHighlight,Button, View, Text, DatePickerIOS } from "react-native";
+import {ActivityIndicator, Modal, StyleSheet, TouchableHighlight,Button, View, Text, DatePickerIOS, Linking } from "react-native";
 import LottieView from 'lottie-react-native';
 import { Countdown } from 'react-native-countdown-text';
 
@@ -26,39 +26,16 @@ class LottiePage extends React.Component {
   setDate = (newDate) => {
     this.setState({chosenDate: newDate})
   }
+
+  sayFuck = () => {
+    // debugger
+    // console.log('fuck')
+    Linking.openURL('tel:10086') // 打电话
+  }
   render() {
     return (
       <View style={{ marginTop: 22 }}>
-        <Modal
-          animationType="slide"
-          transparent={false}
-          visible={this.state.modalVisible}
-          onRequestClose={() => {
-            alert("Modal has been closed.");
-          }}
-        >
-          <View style={{ marginTop: 22 }}>
-            <View>
-              <Text>Hello World!</Text>
-
-              <TouchableHighlight
-                onPress={() => {
-                  this.setModalVisible(!this.state.modalVisible);
-                }}
-              >
-                <Text>Hide Modal</Text>
-              </TouchableHighlight>
-            </View>
-          </View>
-        </Modal>
-
-        <TouchableHighlight
-          onPress={() => {
-            this.setModalVisible(true);
-          }}
-        >
-          <Text>Show Modal</Text>
-        </TouchableHighlight>
+        <Button onPress={this.sayFuck} title='say fuck'></Button>
       </View>
     );
   }
