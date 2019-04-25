@@ -3,6 +3,7 @@ import Home from './pages/home/Home'
 import Detail from './pages/detail/Detail'
 import SnapCarousel from './pages/detail/SnapCarousel'
 import Settings from './pages/settings/Settings'
+import WebView from './pages/webView/WebView'
 import {
   Text
 } from 'react-native';
@@ -75,12 +76,15 @@ const OtherStack = createStackNavigator({
     }),
   },
 })
-
+const WebViewStack = createStackNavigator({
+  WebView: WebView,
+});
 export default createAppContainer(createBottomTabNavigator(
   {
     Home: HomeStack,
     Settings: SettingsStack,
     Other: OtherStack,
+    WebView: WebViewStack
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
@@ -92,6 +96,8 @@ export default createAppContainer(createBottomTabNavigator(
         } else if (routeName === 'Settings') {
           iconName = `md-color-fill`;
         } else if (routeName === 'Other') {
+          iconName = `md-desktop`;
+        } else if (routeName === 'WebView') {
           iconName = `md-desktop`;
         }
         // You can return any component that you like here!
