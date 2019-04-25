@@ -1,19 +1,17 @@
 import React from "react";
-import {Button, View, Text, StyleSheet} from "react-native";
+import {ActivityIndicator, Modal, StyleSheet, TouchableHighlight,Button, View, Text, DatePickerIOS } from "react-native";
 import LottieView from 'lottie-react-native';
 import { Countdown } from 'react-native-countdown-text';
 
-var styles = StyleSheet.create({
-  webview_style:{
-    backgroundColor:'#00ff00',
-  }
-});
 class LottiePage extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       batteryLevel: '', // 电池电量
       isCharging: false, // 是否在充电
+      chosenDate: new Date(),
+      modalVisible: false
+
     }
   }
 
@@ -21,15 +19,61 @@ class LottiePage extends React.Component {
 
   }
 
+  setModalVisible = (visible) => {
+    this.setState({ modalVisible: visible });
+  }
+
+  setDate = (newDate) => {
+    this.setState({chosenDate: newDate})
+  }
   render() {
     return (
-      <View>
-        <Text>batteryLevel: {this.state.batteryLevel}</Text>
-        <Text>isCharging: {this.state.isCharging}</Text>
-        <Countdown finishTime={1556175177903} />
+      <View style={{ marginTop: 22 }}>
+        <Modal
+          animationType="slide"
+          transparent={false}
+          visible={this.state.modalVisible}
+          onRequestClose={() => {
+            alert("Modal has been closed.");
+          }}
+        >
+          <View style={{ marginTop: 22 }}>
+            <View>
+              <Text>Hello World!</Text>
+
+              <TouchableHighlight
+                onPress={() => {
+                  this.setModalVisible(!this.state.modalVisible);
+                }}
+              >
+                <Text>Hide Modal</Text>
+              </TouchableHighlight>
+            </View>
+          </View>
+        </Modal>
+
+        <TouchableHighlight
+          onPress={() => {
+            this.setModalVisible(true);
+          }}
+        >
+          <Text>Show Modal</Text>
+        </TouchableHighlight>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center'
+  },
+  horizontal: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: 10
+  }
+})
 
 export default LottiePage
