@@ -4,6 +4,7 @@ import Detail from './pages/detail/Detail'
 import SnapCarousel from './pages/detail/SnapCarousel'
 import Settings from './pages/settings/Settings'
 import WebView from './pages/webView/WebView'
+import Lottie from './pages/lottie/Lottie'
 import {
   Text
 } from 'react-native';
@@ -79,12 +80,16 @@ const OtherStack = createStackNavigator({
 const WebViewStack = createStackNavigator({
   WebView: WebView,
 });
+const LottieStack = createStackNavigator({
+  Lottie: Lottie,
+});
 export default createAppContainer(createBottomTabNavigator(
   {
     Home: HomeStack,
     Settings: SettingsStack,
     Other: OtherStack,
-    WebView: WebViewStack
+    WebView: WebViewStack,
+    Lottie: LottieStack,
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
@@ -98,6 +103,8 @@ export default createAppContainer(createBottomTabNavigator(
         } else if (routeName === 'Other') {
           iconName = `md-desktop`;
         } else if (routeName === 'WebView') {
+          iconName = `md-desktop`;
+        }else if (routeName === 'Lottie') {
           iconName = `md-desktop`;
         }
         // You can return any component that you like here!
