@@ -5,6 +5,7 @@ import SnapCarousel from './pages/detail/SnapCarousel'
 import Settings from './pages/settings/Settings'
 import WebView from './pages/webView/WebView'
 import Lottie from './pages/lottie/Lottie'
+import Element from './pages/element/Element'
 import {
   Text
 } from 'react-native';
@@ -20,7 +21,7 @@ setTimeout(() => {
   SplashScreen.hide();
 }, 1000)
 
-
+// console.disableYellowBox = true;
 const HomeStack = createStackNavigator({
   Home: {
     screen: Home,
@@ -77,6 +78,9 @@ const OtherStack = createStackNavigator({
     }),
   },
 })
+const ElementStack = createStackNavigator({
+  Element: Element,
+});
 const WebViewStack = createStackNavigator({
   WebView: WebView,
 });
@@ -85,6 +89,7 @@ const LottieStack = createStackNavigator({
 });
 export default createAppContainer(createBottomTabNavigator(
   {
+    Element: Element,
     Home: HomeStack,
     Settings: SettingsStack,
     Other: OtherStack,
@@ -104,7 +109,9 @@ export default createAppContainer(createBottomTabNavigator(
           iconName = `md-desktop`;
         } else if (routeName === 'WebView') {
           iconName = `md-desktop`;
-        }else if (routeName === 'Lottie') {
+        } else if (routeName === 'Lottie') {
+          iconName = `md-desktop`;
+        } else if (routeName === 'Element') {
           iconName = `md-desktop`;
         }
         // You can return any component that you like here!
