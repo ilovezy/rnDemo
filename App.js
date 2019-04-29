@@ -9,10 +9,9 @@ import {
 } from "react-navigation";
 import SplashScreen from 'react-native-splash-screen'
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import StackViewStyleInterpolator from "react-navigation-stack/src/views/StackView/StackViewStyleInterpolator";
 
-setTimeout(() => {
-  SplashScreen.hide();
-}, 1000)
+SplashScreen.hide();
 
 class HomeScreen extends React.Component {
   static navigationOptions = ({navigation, navigationOptions, screenProps}) => {
@@ -29,7 +28,7 @@ class HomeScreen extends React.Component {
       headerRight: (
         <Button
           onPress={navigation.getParam('increaseCount')}
-          title="+123"
+          title="+12332131"
         />
       ),
     }
@@ -191,6 +190,9 @@ const AppNavigator = createStackNavigator({
       fontWeight: 'bold',
     },
   },
+  transitionConfig: () => ({
+    screenInterpolator: StackViewStyleInterpolator.forHorizontal,
+  })
 });
 
 class IconWithBadge extends React.Component {
@@ -259,7 +261,7 @@ const TabNavigator = createSwitchNavigator({
   },
 });
 
-const AppContainer = createAppContainer(TabNavigator);
+const AppContainer = createAppContainer(AppNavigator);
 
 export default AppContainer
 
