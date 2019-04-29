@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, View, Text} from "react-native";
+import {Button, View, Text, StyleSheet} from "react-native";
 import {
   createBottomTabNavigator,
   createStackNavigator,
@@ -10,6 +10,7 @@ import {
 import SplashScreen from 'react-native-splash-screen'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import StackViewStyleInterpolator from "react-navigation-stack/src/views/StackView/StackViewStyleInterpolator";
+import Spinner from 'react-native-loading-spinner-overlay';
 
 SplashScreen.hide();
 
@@ -35,7 +36,7 @@ class HomeScreen extends React.Component {
   }
 
   state = {
-    count: 0,
+    count: 0, spinner: true
   }
 
   _increaseCount = () => {
@@ -45,32 +46,31 @@ class HomeScreen extends React.Component {
   componentDidMount(): void {
     console.log('home mount')
     this.props.navigation.setParams({increaseCount: this._increaseCount})
+
+    // setInterval(() => {
+    //   this.setState({
+    //     spinner: !this.state.spinner
+    //   });
+    // }, 3000);
   }
 
   componentWillUnmount(): void {
     console.log('home will unmount')
   }
 
-  willFocus() {
-    console.log('home willFocus')
-  }
-
-  didFocus() {
-    console.log('home didFocus')
-  }
-
-  willBlur() {
-    console.log('home willBlur')
-  }
-
-  didBlur() {
-    console.log('home didBlur')
-  }
-
   render() {
     console.log(this.props.isFocused)
     return (
       <View style={{flex: 1, alignItems: "center", justifyContent: "center"}}>
+        <Spinner
+          visible={this.state.spinner}
+          textContent={'Loading...'}
+          textStyle={styles.spinnerTextStyle}
+        />
+        <Text style={styles.welcome}>Welcome to React Native!</Text>
+        <Text style={styles.instructions}>To get started, edit App.js</Text>
+        <Text style={styles.instructions}>shit</Text>
+
         <Text>Home Screen 123 12 {this.state.count}</Text>
         <Text>{this.props.isFocused ? 'Focused' : 'Not focused'}</Text>
 
@@ -270,3 +270,24 @@ export default AppContainer
 //     return <AppContainer/>;
 //   }
 // }
+const styles = StyleSheet.create({
+  spinnerTextStyle: {
+    color: '#FFF'
+  },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF'
+  },
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10
+  },
+  instructions: {
+    textAlign: 'center',
+    color: '#333333',
+    marginBottom: 5
+  }
+});
