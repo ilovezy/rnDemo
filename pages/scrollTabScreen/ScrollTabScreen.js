@@ -9,8 +9,12 @@ import {
   withNavigationFocus,
 } from "react-navigation";
 import Swiper from 'react-native-swiper';
+import Dialog, {DialogTitle, ScaleAnimation, SlideAnimation, DialogContent,DialogFooter, DialogButton, } from 'react-native-popup-dialog';
 
 export default class ScrollTabScreen extends React.Component {
+  state = {
+    visible: false
+  }
   render() {
     var sliderImgs = [
       'http://images3.c-ctrip.com/SBU/apph5/201505/16/app_home_ad16_640_128.png',
@@ -19,7 +23,7 @@ export default class ScrollTabScreen extends React.Component {
     ];
     return (
       <ScrollableTabView>
-        <View tabLabel="React"
+        <View tabLabel="Test swiper"
               style={{display: 'flex', flex: 1, height: '100%'}}>
           <Swiper loadMinimal={true}
                   bounces={true}>
@@ -40,29 +44,48 @@ export default class ScrollTabScreen extends React.Component {
                    source={{uri: sliderImgs[2]}}></Image>
           </Swiper>
         </View>
-        <ScrollView tabLabel="fads"><Text>
-          ipsum dolor sit amet, consectetur adipisicing elit. Aperiam at, atque
-          blanditiis debitis dolore eligendi eveniet facere inventore maiores natus nobis officia quidem quos saepe
-          soluta totam velit. A accusantium autem consectetur, consequuntur ducimus ea, eveniet explicabo fugiat in
-          ipsum itaque laboriosam laborum laudantium minus molestiae necessitatibus odit optio tempora ullam vel? Amet
-          at aut blanditiis commodi dignissimos doloremque ea enim eveniet excepturi expedita facere fuga harum hic illo
-          illum, in ipsam iusto libero magni minus modi mollitia nam natus, numquam odio odit provident quidem
-          recusandae saepe sint, soluta sunt tempora totam ut vel velit voluptate? Aliquid dolore dolores eius quia unde
-          veritatis voluptatem? Adipisci aliquid, beatae blanditiis consequatur cumque distinctio, et facilis, non
-          obcaecati quae sapiente sequi tenetur ut velit voluptate voluptatem voluptatibus! A accusantium amet commodi
-          dignissimos ducimus eligendi, impedit, in molestias nostrum quod recusandae reprehenderit rerum sint voluptas
-          voluptates! Accusantium animi doloremque eos eum ex explicabo facilis, fuga in magnam, minus mollitia nemo
-          neque nihil ratione totam? Assumenda distinctio earum eveniet iusto labore officia optio pariatur quae quos
-          ratione! Amet architecto consequatur ducimus harum nobis optio quasi quia repellat suscipit, ullam. Accusamus
-          accusantium alias amet aperiam at aut autem consequuntur, cupiditate distinctio dolor doloremque ea eaque esse
-          eveniet excepturi expedita fugit id ipsum iure laboriosam maiores minus molestias natus nesciunt odio odit
-          officiis, omnis pariatur perspiciatis praesentium quasi qui recusandae repellat! A ab, aspernatur dolore
-          necessitatibus nostrum sit ullam voluptas? Aliquam ex expedita iure laudantium officiis possimus provident
-          recusandae ut veniam vero. Expedita, iusto voluptatibus. Adipisci aliquam amet atque aut delectus dolorum est
-          ex excepturi explicabo facere illo illum ipsa, ipsam nam nisi nostrum obcaecati odio optio pariatur
-          perspiciatis provident quas qui quos ratione reiciendis repellendus reprehenderit sapiente sint, sunt tenetur
-          vel veniam vitae voluptatibus! Adipisci id incidunt maxime odio? Error iste maxime perferendis porro qui
-          suscipit.</Text></ScrollView>
+        <ScrollView tabLabel="Test dialog">
+          <Text> fdasfdasfs</Text>
+          <Button
+            title="Show Dialog sfdafasdfdasf"
+            onPress={() => {
+              this.setState({ visible: true });
+            }}
+          />
+          <Dialog
+            visible={this.state.visible}
+            width={0.8}
+            dialogTitle={<DialogTitle title="Dialog 123Title" />}
+            onHardwareBackPress={() => {
+              this.setState({ visible: false });
+            }}
+            dialogAnimation={new ScaleAnimation({
+              initialValue: 0, // optional
+              useNativeDriver: true, // optional
+            })}
+            footer={
+              <DialogFooter>
+                <DialogButton
+                  text="CANCEL"
+                  onPress={() => {}}
+                />
+                <DialogButton
+                  text="OK"
+                  onPress={() => {}}
+                />
+              </DialogFooter>
+            }
+            onTouchOutside={() => {
+              this.setState({ visible: false });
+            }}>
+            <DialogContent style={{paddingTop: 15}}>
+              <Text style={{color: 'green'}}>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate fugit odio saepe. Aliquam aspernatur expedita odio. Corporis optio quas quod.
+              </Text>
+            </DialogContent>
+          </Dialog>
+
+        </ScrollView>
         <ScrollView tabLabel="2221"><Text>321321</Text></ScrollView>
       </ScrollableTabView>
     )
