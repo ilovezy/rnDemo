@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, View, Text, StyleSheet} from "react-native";
+import {Button, View, Text, StyleSheet, ScrollView} from "react-native";
 import {
   createBottomTabNavigator,
   createStackNavigator,
@@ -12,8 +12,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import StackViewStyleInterpolator from "react-navigation-stack/src/views/StackView/StackViewStyleInterpolator";
 import Spinner from 'react-native-loading-spinner-overlay';
 import Hyperlink from 'react-native-hyperlink'
-
-var ScrollableTabView = require('react-native-scrollable-tab-view');
+import ScrollTabScreen from './pages/scrollTabScreen/ScrollTabScreen'
 
 SplashScreen.hide();
 
@@ -170,17 +169,6 @@ class ModalScreen extends React.Component {
   }
 }
 
-class ScrollTabScreen extends React.Component {
-  render() {
-    return (
-      <ScrollableTabView>
-        <View tabLabel="React"><Text>231</Text></View>
-        <View tabLabel="fads"><Text>3213</Text></View>
-        <View tabLabel="2221"><Text>321321</Text></View>
-      </ScrollableTabView>
-    )
-  }
-}
 
 const AppNavigator = createStackNavigator({
   Home: {
