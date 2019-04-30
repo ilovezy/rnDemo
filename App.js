@@ -13,6 +13,8 @@ import StackViewStyleInterpolator from "react-navigation-stack/src/views/StackVi
 import Spinner from 'react-native-loading-spinner-overlay';
 import Hyperlink from 'react-native-hyperlink'
 
+var ScrollableTabView = require('react-native-scrollable-tab-view');
+
 SplashScreen.hide();
 
 class HomeScreen extends React.Component {
@@ -75,7 +77,7 @@ class HomeScreen extends React.Component {
           textStyle={styles.spinnerTextStyle}
         />
         <Hyperlink
-          onPress={(url, text) => alert(url + ", " + text) }
+          onPress={(url, text) => alert(url + ", " + text)}
           linkStyle={{color: '#2980b9', fontSize: 20}}
           linkText={url => url === 'https://github.com/obipawan/hyperlink' ? 'Hyperlink' : url}
         >
@@ -89,42 +91,15 @@ class HomeScreen extends React.Component {
 
         <Text>Home Screen 123 12 {this.state.count}</Text>
         <Text>{this.props.isFocused ? 'Focused' : 'Not focused'}</Text>
-
-        <Button
-          title="Go to Details"
-          onPress={() => this.props.navigation.navigate('Details', {
-            itemId: 86,
-            otherParam: 'anything you want here',
-          })}
-        />
-
-        <Button
-          title="open spinner"
-          onPress={this.openSpinner}
-        />
       </View>
     );
   }
 }
 
 class DetailsScreen extends React.Component {
-  // static navigationOptions = {
-  //   title: 'Details fasf见覅OA 非机动阿双方均到事发地奥房间爱哦覅大是否按ofID静安寺房价大幅',
-  // }
   static navigationOptions = (obj) => {
-    console.log('Details obj', obj)
-    // console.log(navigation, navigationOptions, screenProps)
-
     return {
       title: 'Details',
-      // headerStyle: {
-      //   backgroundColor: 'black',
-      // },
-      // headerTintColor: 'red',
-      // headerTitleStyle: {
-      //   color: 'blue',
-      //   fontWeight: 'bold',
-      // },
     }
   }
 
@@ -195,6 +170,18 @@ class ModalScreen extends React.Component {
   }
 }
 
+class ScrollTabScreen extends React.Component {
+  render() {
+    return (
+      <ScrollableTabView>
+        <View tabLabel="React"><Text>231</Text></View>
+        <View tabLabel="fads"><Text>3213</Text></View>
+        <View tabLabel="2221"><Text>321321</Text></View>
+      </ScrollableTabView>
+    )
+  }
+}
+
 const AppNavigator = createStackNavigator({
   Home: {
     screen: withNavigationFocus(HomeScreen)
@@ -251,10 +238,10 @@ const HomeIconWithBadge = (props) => {
   return <IconWithBadge {...props} badgeCount={3}/>;
 }
 
-const TabNavigator = createSwitchNavigator({
+const TabNavigator = createBottomTabNavigator({
   Home: HomeScreen,
   Details: DetailsScreen,
-
+  ScrollTab: ScrollTabScreen,
 }, {
   defaultNavigationOptions: ({navigation}) => ({
     tabBarIcon: ({focused, horizontal, tintColor}) => {
@@ -268,8 +255,9 @@ const TabNavigator = createSwitchNavigator({
         IconComponent = HomeIconWithBadge;
       } else if (routeName === 'Details') {
         iconName = `ios-options`;
+      } else if (routeName === 'ScrollTab') {
+        iconName = `ios-options`;
       }
-
       // You can return any component that you like here!
       return <IconComponent name={iconName}
                             size={25}
@@ -282,7 +270,8 @@ const TabNavigator = createSwitchNavigator({
   },
 });
 
-const AppContainer = createAppContainer(AppNavigator);
+// const AppContainer = createAppContainer(AppNavigator);
+const AppContainer = createAppContainer(TabNavigator);
 
 export default AppContainer
 
