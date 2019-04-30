@@ -11,6 +11,7 @@ import SplashScreen from 'react-native-splash-screen'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import StackViewStyleInterpolator from "react-navigation-stack/src/views/StackView/StackViewStyleInterpolator";
 import Spinner from 'react-native-loading-spinner-overlay';
+import Hyperlink from 'react-native-hyperlink'
 
 SplashScreen.hide();
 
@@ -36,7 +37,8 @@ class HomeScreen extends React.Component {
   }
 
   state = {
-    count: 0, spinner: true
+    count: 0,
+    spinner: false
   }
 
   _increaseCount = () => {
@@ -46,16 +48,21 @@ class HomeScreen extends React.Component {
   componentDidMount(): void {
     console.log('home mount')
     this.props.navigation.setParams({increaseCount: this._increaseCount})
-
-    // setInterval(() => {
-    //   this.setState({
-    //     spinner: !this.state.spinner
-    //   });
-    // }, 3000);
   }
 
   componentWillUnmount(): void {
     console.log('home will unmount')
+  }
+
+  openSpinner = () => {
+    this.setState({
+      spinner: !this.state.spinner
+    });
+    setTimeout(() => {
+      this.setState({
+        spinner: !this.state.spinner
+      });
+    }, 2000)
   }
 
   render() {
@@ -67,6 +74,15 @@ class HomeScreen extends React.Component {
           textContent={'Loading...'}
           textStyle={styles.spinnerTextStyle}
         />
+        <Hyperlink
+          onPress={(url, text) => alert(url + ", " + text) }
+          linkStyle={{color: '#2980b9', fontSize: 20}}
+          linkText={url => url === 'https://github.com/obipawan/hyperlink' ? 'Hyperlink' : url}
+        >
+          <Text style={{fontSize: 15}}>
+            Make clickable strings cleaner with https://github.com/obipawan/hyperlink
+          </Text>
+        </Hyperlink>
         <Text style={styles.welcome}>Welcome to React Native!</Text>
         <Text style={styles.instructions}>To get started, edit App.js</Text>
         <Text style={styles.instructions}>shit</Text>
@@ -80,6 +96,11 @@ class HomeScreen extends React.Component {
             itemId: 86,
             otherParam: 'anything you want here',
           })}
+        />
+
+        <Button
+          title="open spinner"
+          onPress={this.openSpinner}
         />
       </View>
     );
