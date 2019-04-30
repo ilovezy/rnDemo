@@ -13,6 +13,7 @@ import StackViewStyleInterpolator from "react-navigation-stack/src/views/StackVi
 import Spinner from 'react-native-loading-spinner-overlay';
 import Hyperlink from 'react-native-hyperlink'
 import ScrollTabScreen from './pages/scrollTabScreen/ScrollTabScreen'
+import ParScreen from './pages/par/ParScreen'
 
 SplashScreen.hide();
 
@@ -230,6 +231,7 @@ const TabNavigator = createBottomTabNavigator({
   Home: HomeScreen,
   Details: DetailsScreen,
   ScrollTab: ScrollTabScreen,
+  ParScreen: ParScreen,
 }, {
   defaultNavigationOptions: ({navigation}) => ({
     tabBarIcon: ({focused, horizontal, tintColor}) => {
@@ -245,6 +247,8 @@ const TabNavigator = createBottomTabNavigator({
         iconName = `ios-options`;
       } else if (routeName === 'ScrollTab') {
         iconName = `ios-options`;
+      }else if (routeName === 'ScrollTab') {
+        iconName = `ios-car`;
       }
       // You can return any component that you like here!
       return <IconComponent name={iconName}

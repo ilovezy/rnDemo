@@ -25,6 +25,7 @@
     "react-native-maps": "^0.24.2",
     "react-native-modal": "^9.0.0",
     "react-native-navigation": "^2.18.3",
+    "react-native-parallax-scroll-view": "^0.21.3",
     "react-native-popup-dialog": "^0.18.2",
     "react-native-progress": "^3.6.0",
     "react-native-root-toast": "^3.0.2",

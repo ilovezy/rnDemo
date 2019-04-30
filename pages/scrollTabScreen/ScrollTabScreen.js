@@ -10,6 +10,7 @@ import {
 } from "react-navigation";
 import Swiper from 'react-native-swiper';
 import Dialog, {DialogTitle, ScaleAnimation, SlideAnimation, DialogContent,DialogFooter, DialogButton, } from 'react-native-popup-dialog';
+import ParallaxScrollView from 'react-native-parallax-scroll-view';
 
 export default class ScrollTabScreen extends React.Component {
   state = {
@@ -86,7 +87,9 @@ export default class ScrollTabScreen extends React.Component {
           </Dialog>
 
         </ScrollView>
-        <ScrollView tabLabel="2221"><Text>321321</Text></ScrollView>
+        <ScrollView tabLabel="2221">
+          <Text>sji</Text>
+        </ScrollView>
       </ScrollableTabView>
     )
   }

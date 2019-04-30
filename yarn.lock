@@ -5370,6 +5370,13 @@ react-native-navigation@^2.18.3:
     react-lifecycles-compat "2.0.0"
     tslib "1.9.3"
 
+react-native-parallax-scroll-view@^0.21.3:
+  version "0.21.3"
+  resolved "https://registry.npm.taobao.org/react-native-parallax-scroll-view/download/react-native-parallax-scroll-view-0.21.3.tgz#d956ad224ce3b0a2725b80574bcbf688bbeda14e"
+  integrity sha1-2VatIkzjsKJyW4BXS8v2iLvtoU4=
+  dependencies:
+    prop-types "^15.6.0"
+
 react-native-popup-dialog@^0.18.2:
   version "0.18.2"
   resolved "https://registry.npm.taobao.org/react-native-popup-dialog/download/react-native-popup-dialog-0.18.2.tgz#f36474974e3838ac670f03e006dbc75d5d224b38"
