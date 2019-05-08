@@ -14,6 +14,8 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import Hyperlink from 'react-native-hyperlink'
 import ScrollTabScreen from './pages/scrollTabScreen/ScrollTabScreen'
 import ParScreen from './pages/par/ParScreen'
+import JPushModule from 'jpush-react-native';
+alert(JPushModule)
 
 SplashScreen.hide();
 
@@ -21,6 +23,7 @@ class HomeScreen extends React.Component {
   static navigationOptions = ({navigation, navigationOptions, screenProps}) => {
     return {
       title: 'Home',
+      pushMsg: '',
       headerStyle: {
         backgroundColor: '#f4511e',
       },
@@ -48,12 +51,29 @@ class HomeScreen extends React.Component {
   }
 
   componentDidMount(): void {
-    console.log('home mount')
-    this.props.navigation.setParams({increaseCount: this._increaseCount})
+    // 初始化 JPush
+    JPushModule.initPush()
+    // 获取当前极光开发者信息
+    JPushModule.getInfo(map => {
+      console.log(map)
+    })
+    // 点击推送通知回调
+    JPushModule.addReceiveOpenNotificationListener(map => {
+      console.log('进行一系列操作')
+      console.log('map.extra: ' + map)
+      // 可执行跳转操作，也可跳转原生页面 关于参数请看文档
+      // this.props.navigation.navigate("SecondActivity");
+    })
+    // 接收推送通知回调
+    JPushModule.addReceiveNotificationListener(message => {
+      console.log('receive notification: ', message)
+    })
   }
 
   componentWillUnmount(): void {
     console.log('home will unmount')
+    // JPushModule.removeReceiveCustomMsgListener();
+    // JPushModule.removeReceiveNotificationListener();
   }
 
   openSpinner = () => {
