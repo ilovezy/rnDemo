@@ -15,7 +15,6 @@ import Hyperlink from 'react-native-hyperlink'
 import ScrollTabScreen from './pages/scrollTabScreen/ScrollTabScreen'
 import ParScreen from './pages/par/ParScreen'
 import JPushModule from 'jpush-react-native';
-alert(JPushModule)
 
 SplashScreen.hide();
 
@@ -23,7 +22,6 @@ class HomeScreen extends React.Component {
   static navigationOptions = ({navigation, navigationOptions, screenProps}) => {
     return {
       title: 'Home',
-      pushMsg: '',
       headerStyle: {
         backgroundColor: '#f4511e',
       },
@@ -43,7 +41,9 @@ class HomeScreen extends React.Component {
 
   state = {
     count: 0,
-    spinner: false
+    spinner: false,
+    pushMsg: '',
+    receiveMsg: '',
   }
 
   _increaseCount = () => {
@@ -53,21 +53,60 @@ class HomeScreen extends React.Component {
   componentDidMount(): void {
     // 初始化 JPush
     JPushModule.initPush()
-    // 获取当前极光开发者信息
-    JPushModule.getInfo(map => {
-      console.log(map)
+
+    // 在收到点击事件之前调用此接口
+    JPushModule.notifyJSDidLoad((resultCode) => {
+      if (resultCode === 0) {
+      }
+    });
+    JPushModule.addReceiveNotificationListener((map) => {
+      console.log("alertContent: " + map.alertContent);
+      console.log("extras: " + map.extras);
+      // var extra = JSON.parse(map.extras);
+      // console.log(extra.key + ": " + extra.value);
+    });
+
+    var arr = [{
+      selectListA: [{}],
+      selectListA: [{}],
+      selectListA: [{}],
+      selectListA: [{}],
+    },{
+      selectListA: [{}],
+      selectListA: [{}],
+      selectListA: [{}],
+      selectListA: [{}],
+    },{
+      selectListA: [{}],
+      selectListA: [{}],
+      selectListA: [{}],
+      selectListA: [{}],
+    },{
+      selectListA: [{}],
+      selectListA: [{}],
+      selectListA: [{}],
+      selectListA: [{}],
+    },{
+      selectListA: [{}],
+      selectListA: [{}],
+      selectListA: [{}],
+      selectListA: [{}],
+    }]
+
+    JPushModule.addReceiveCustomMsgListener((message) => {
+      alert('addReceiveCustomMsgListener notification:' + JSON.stringify(message,null,4))
+      // this.setState({pushMsg: message});
+    });
+    JPushModule.addReceiveNotificationListener((message) => {
+      console.log("receive notification: " + message);
+      alert('receive notification:' + JSON.stringify(message,null,4))
+      this.setState({receiveMsg: message.alertContent});
     })
-    // 点击推送通知回调
-    JPushModule.addReceiveOpenNotificationListener(map => {
-      console.log('进行一系列操作')
-      console.log('map.extra: ' + map)
-      // 可执行跳转操作，也可跳转原生页面 关于参数请看文档
-      // this.props.navigation.navigate("SecondActivity");
-    })
-    // 接收推送通知回调
-    JPushModule.addReceiveNotificationListener(message => {
-      console.log('receive notification: ', message)
-    })
+    JPushModule.addReceiveOpenNotificationListener((map) => {
+      console.log("Opening notification!");
+      console.log("map.extra: " + map.key);
+      alert('open' + JSON.stringify(map))
+    });
   }
 
   componentWillUnmount(): void {
@@ -105,9 +144,34 @@ class HomeScreen extends React.Component {
             Make clickable strings cleaner with https://github.com/obipawan/hyperlink
           </Text>
         </Hyperlink>
+
+        <Button
+          title="点击推送"
+          onPress={() => {
+            // 推送事件 业务代码 请提取到函数里面
+            JPushModule.sendLocalNotification({
+              buildId: 2, // 设置通知样式
+              id: 5, // 通知的 id, 可用于取消通知
+              extra: { key1: 'value1', key2: 'value2' }, // extra 字段 就是我们需要传递的参数
+              fireTime: new Date().getTime(), // 通知触发时间的时间戳（毫秒）
+              badge: 8, // 本地推送触发后应用角标的 badge 值 （iOS Only）
+              subtitle: 'subtitle',  // 子标题 （iOS10+ Only）
+              title: '通知321321321321dsafas',
+              content: '您有未读消息fdsafdsafdsf',
+            })
+          }}
+        />
+
+        <Button
+          title="清空本地推送"
+          onPress={() => {
+            JPushModule.clearLocalNotifications();
+          }}
+        />
         <Text style={styles.welcome}>Welcome to React Native!</Text>
         <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>shit</Text>
+        <Text style={styles.instructions}>pushMsg: {this.state.pushMsg}</Text>
+        <Text style={styles.instructions}>receiveMsg: {this.state.receiveMsg}</Text>
 
         <Text>Home Screen 123 12 {this.state.count}</Text>
         <Text>{this.props.isFocused ? 'Focused' : 'Not focused'}</Text>

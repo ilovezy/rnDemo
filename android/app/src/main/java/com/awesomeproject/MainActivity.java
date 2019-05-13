@@ -15,6 +15,7 @@ public class MainActivity extends ReactActivity {
   protected void onCreate(Bundle savedInstanceState) {
     SplashScreen.show(this);  // here
     super.onCreate(savedInstanceState);
+//    JPushInterface.init(this);
   }
 
   /**
@@ -25,6 +26,18 @@ public class MainActivity extends ReactActivity {
   protected String getMainComponentName() {
     return "AwesomeProject";
   }
+
+//  @Override
+//  protected void onPause() {
+//    super.onPause();
+//    JPushInterface.onPause(this);
+//  }
+//
+//  @Override
+//  protected void onResume() {
+//    super.onResume();
+//    JPushInterface.onResume(this);
+//  }
 
   @Override
   protected ReactActivityDelegate createReactActivityDelegate() {
